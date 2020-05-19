@@ -1,4 +1,8 @@
+
+
 from django.db import models
+from django.utils.timezone import now
+
 from movies.models import Movie
 from accounts.models import CustomUser
 
@@ -15,8 +19,14 @@ class Theme(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(to=CustomUser, null=True, on_delete=models.SET_NULL, related_name='posts')
-    # ToDo: change SET_NULL to SET_DEFAULT
-    reply_to = models.OneToOneField(to='self', null=True, blank=True, on_delete=models.SET_NULL)
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Publication Date')
+    text = models.TextField(max_length=4096)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, null=True)
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(to=CustomUser, null=True, on_delete=models.SET_NULL, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField(max_length=4096)
 
 

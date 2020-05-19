@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'accounts',
     'discussions',
     'movies',
+    'chat',
+    'channels',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -122,6 +125,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# Crispy settings
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 STATIC_URL = '/static/'
 
 # Directory for media files storing
@@ -132,3 +138,14 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# Channels
+ASGI_APPLICATION = 'django_sem.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
