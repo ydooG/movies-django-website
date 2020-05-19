@@ -27,7 +27,5 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 
-class UserLoginForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'password')
+class UserPhotoLoadForm(forms.Form):
+    photo = forms.FileField(label='Photo')

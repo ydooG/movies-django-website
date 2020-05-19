@@ -1,7 +1,37 @@
 {% extends 'accounts/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-    <h2>Profile</h2>
+    <div class="row">
+        <div class="col">
+            <h1>Profile</h1>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            {% if photo %}
+                <img class="img-thumbnail mx-auto d-block" src="{{ photo.url }}" alt="Profile photo" width="300" height="300">
+            {% else %}
+                <p>У вас нет фотографии профиля. Хотите
+                    <a href="{% url 'accounts:load_photo' %}">добавить</a>?</p>
+            {% endif %}
+        </div>
+
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="row">
+        <div style="text-align: center" class="col">
+            <a href="{% url 'accounts:load_photo'%}">Изменить</a>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
 {% endblock %}

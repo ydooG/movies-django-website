@@ -3,8 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 def get_photo_path(instance, filename):
-    return f'profiles/{instance.username}/photo'
+    extension = filename.split('.')[-1]
+    return f'profiles/{instance.username}/photo.{extension}'
 
 
 class CustomUser(AbstractUser):
-    profile_photo = models.FileField(upload_to=get_photo_path)
+    profile_photo = models.ImageField(upload_to=get_photo_path)
+

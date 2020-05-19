@@ -2,11 +2,14 @@ from django.db import models
 
 
 def get_episode_path(instance, filename):
-    return f'movies/{instance.movie.name}/season_{instance.season}/episode_{instance.number}'
+    extension = filename.split('.')[-1]
+    return f'movies/{instance.movie.name}/season_{instance.season}' \
+           f'/episode_{instance.number}.{extension}'
 
 
 def get_movie_image_path(instance, filename):
-    return f'movies/{instance.movie.name}/logo'
+    extension = filename.split('.')[-1]
+    return f'movies/{instance.movie.name}/logo.{extension}'
 
 
 class Movie(models.Model):
