@@ -1,4 +1,4 @@
-{% extends 'account/base.html' %}
+{% extends 'accounts/base.html' %}
 {% block title %}
     Chat members
 {% endblock %}
@@ -10,7 +10,7 @@
         </div>
         <ul>
             {% for user in members %}
-                <li><a href="{% url 'account:profile' user.username %}"><h5>{{ user.username }}</h5></a></li>
+                <li><a href="{% url 'accounts:profile' user.username %}"><h5>{{ user.username }}</h5></a></li>
             {% endfor %}
         </ul>
     </div>

@@ -1,4 +1,4 @@
-{% extends 'account/base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block title %}
     Chat room
@@ -18,12 +18,12 @@
                     <p class="m-2 border {% if message.author == request.user %}
                     border-primary {% else %}border-warning
                     {% endif %} rounded-lg p-2">
-                        <a href="{% url 'account:profile'  message.author.username %}">
+                        <a href="{% url 'accounts:profile'  message.author.username %}">
                             {{ message.author.username }}:
                         </a>
                         <br>
                         <span class="">
-                                {{ message.content.text }}
+                                {{ message.text }}
                                 <span class="font-weight-light">{{ message.pub_date.time }}</span>
                             </span>
                     </p>

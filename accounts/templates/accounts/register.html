@@ -7,11 +7,11 @@
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
 
     <div class="row">
-{#        <p>Есть аккаунт? <a href="{% url 'accounts:login' %}">Войти</a></p>#}
+        <p>Already created account? <a href="{% url 'accounts:login' %}">Login</a></p>
     </div>
 {% endblock %}

@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Row, Column
 from django import forms
 
 from accounts.models import CustomUser
@@ -16,3 +18,16 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Пароли не совпадают.')
         return cd['password2']
+
+    def save(self, commit=True):
+        user = super(UserRegistrationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
+
+
+class UserLoginForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'password')

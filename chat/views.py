@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, FormView
 
-from account.models import CustomUser
+from accounts.models import CustomUser
 from chat.forms import ChatForm
 from chat.models import Chat, Message
 
@@ -11,7 +11,6 @@ from chat.models import Chat, Message
 class ChatAccessMixin(AccessMixin):
 
     def dispatch(self, request, *args, **kwargs):
-        print(kwargs)
         chat = Chat.objects.get(id=kwargs['id'])
         if not request.user.is_authenticated and request.user not in chat.members:
             return self.handle_no_permission()
