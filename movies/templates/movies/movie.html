@@ -1,0 +1,50 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}{{ movie.name }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            <h3>{{ movie.name }}</h3>
+            <hr>
+            <div class="my-image">
+                <img class="img-thumbnail mx-auto d-block" src="{{ movie.movie_picture.url }}" alt="Фото аниме"
+                     width="450">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <br>
+            <span>{{ movie.description }}</span>
+            <br>
+            <br>
+            <button class="btn btn-success" onclick="location.href='{% url 'movies:add_episode' %}'">
+                Добавить серию
+            </button>
+        </div>
+    </div>
+    {% for season in seasons %}
+        <div class="row mt-5">
+            <div class="col text-center">
+                {{ season }} Сезон
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {% for episode in episodes %}
+                    {% if episode.season == season %}
+                        <button onclick="location.href='{% url 'movies:watch_episode' episode.movie.id episode.season episode.number%}'"
+                                class="btn btn-outline-success">
+                        {{ episode.number }}{% if episode.title %} - {{ episode.title }}{% endif %}
+                    </button>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

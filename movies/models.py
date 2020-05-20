@@ -7,7 +7,8 @@ from transliterate import translit
 
 def get_episode_path(instance, filename):
     extension = filename.split('.')[-1]
-    return f'movies/{instance.movie.name}/season_{instance.season}' \
+    name = translit(instance.movie.name, "ru", reversed=True).replace(' ', '_')
+    return f'movies/{name}/season_{instance.season}' \
            f'/episode_{instance.number}.{extension}'
 
 
@@ -31,7 +32,7 @@ class Movie(models.Model):
     movie_picture = models.ImageField(
         upload_to=get_movie_image_path,
         validators=[FileExtensionValidator(allowed_extensions=CustomUser.VALID_IMAGE_EXTENSIONS)],
-        help_text='Лучше грузить фотографии в альбомном стиле',
+        help_text='Лучше не грузить фотографии в альбомном ориентации, околоквадратные - лучше всего',
         verbose_name='Картинка',
     )
 
@@ -40,8 +41,59 @@ class Movie(models.Model):
 
 
 class Episode(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, null=True)
-    number = models.PositiveSmallIntegerField()
-    season = models.PositiveSmallIntegerField()
-    title = models.CharField(max_length=128)
-    video_obj = models.FileField(upload_to=get_episode_path)
+
+    VALID_VIDEO_EXTENSIONS = [
+        "webm",
+        "mkv",
+        "flv",
+        "avi",
+        "wmv",
+        "mp4",
+    ]
+
+    class Meta:
+        ordering = ['season', 'number']
+
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='episodes'
+    )
+
+    number = models.PositiveSmallIntegerField(
+
+    )
+
+    season = models.PositiveSmallIntegerField(
+
+    )
+
+    title = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    video_obj = models.FileField(
+        upload_to=get_episode_path,
+        validators=[FileExtensionValidator(allowed_extensions=VALID_VIDEO_EXTENSIONS)],
+    )
+
+    def has_next(self):
+        episodes = self.movie.episodes.all()
+        print(episodes)
+        try:
+            episodes.get(season=self.season, number=self.number+1)
+        except Episode.DoesNotExist:
+            return False
+        return True
+
+    def has_previous(self):
+        episodes = self.movie.episodes.all()
+        print(episodes)
+        try:
+            episodes.get(season=self.season, number=self.number-1)
+        except Episode.DoesNotExist:
+            return False
+        return True

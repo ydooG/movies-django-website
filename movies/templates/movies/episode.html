@@ -1,0 +1,41 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    {{ episode.movie.name }}. {{ episode.season }} сезон {{ episode.number }} серия
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-3 text-left">
+            {% if episode.has_previous %}
+                <button
+                        onclick="location.href='{% url 'movies:watch_episode' episode.movie.id episode.season previous  %}'"
+                        class="btn btn-outline-primary">
+                    Предыдущая серия
+                </button>
+            {% endif %}
+        </div>
+        <div class="col text-center">
+            <h3><b><a href="{% url 'movies:movie_details' episode.movie.id %}">{{ episode.movie.name }}</a></b></h3>
+            <h4>{{ episode.season }} сезон {{ episode.number }} серия</h4>
+            {% if episode.title %}
+                <h4><i>{{ episode.title }}</i></h4>
+            {% endif %}
+        </div>
+        <div class="col-3 text-right">
+            {% if episode.has_next %}
+                <button
+                        onclick="location.href='{% url 'movies:watch_episode' episode.movie.id episode.season next  %}'"
+                        class="btn btn-outline-primary">
+                    Следующая серия
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <video height="600px" controls src="{{ episode.video_obj.url }}">
+
+            </video>
+        </div>
+    </div>
+{% endblock %}

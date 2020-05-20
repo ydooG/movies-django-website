@@ -29,17 +29,24 @@
     </div>
 
     {% for movie in movies %}
-        <div class="row">
+        <div class="row movie">
             <div class="col-3">
                 <img class="img-thumbnail mx-auto d-block" src="{{ movie.movie_picture.url }}" alt="Картинка аниме"
                      width="240" height="150">
             </div>
 
             <div class="col-9">
-                {{ movie.name }} <br>
-                <textarea readonly name="" id="" cols="88" rows="6">
-                        {{ movie.description }}
-                    </textarea>
+                <a href="{% url 'movies:movie_details' movie.id %}">
+                    {{ movie.name }} <i class="fas fa-play-circle"></i>
+                </a>
+                <br>
+                {% if movie.description|length > 400 %}
+                    {{ movie.description|slice:'400' }}
+                    <span>...</span>
+                {% else %}
+                    {{ movie.description }}
+                {% endif %}
+
             </div>
         </div>
         <hr>

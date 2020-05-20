@@ -1,7 +1,9 @@
 body {
     background-color: #F8F8FF;
-    font-family: Montserrat, Roboto;
+    color: #696969;
+    font-family: Montserrat, Roboto, serif;
 }
+
 .container {
     background-color: #FFF;
     border: 1px solid #29ccc9;
@@ -19,8 +21,13 @@ body {
     min-height: 100%;
     padding: 10px;
 }
+
 .fa-arrow-circle-left, .fa-arrow-circle-right {
     font-size: 18pt;
+}
+
+.fa-play-circle {
+    color: #29cc23;
 }
 
 .fa-plus-circle {
@@ -35,11 +42,16 @@ body {
 }
 
 .movie {
-    background-color: #F8F8FF;
+
 }
+
 .movie-create-form {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     width: 600px;
+}
+
+video {
+    text-align: center;
 }

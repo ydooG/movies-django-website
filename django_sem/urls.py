@@ -8,7 +8,8 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('chat/', include('chat.urls')),
     path('discussion/', include('discussions.urls')),
-    path('movies/', include('movies.urls'))
+    path('movies/', include('movies.urls')),
+    path('select2/', include('django_select2.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
