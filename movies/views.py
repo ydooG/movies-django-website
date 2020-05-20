@@ -50,6 +50,10 @@ class EpisodeCreateView(CreateView):
     template_name = 'movies/episode_create.html'
     success_url = reverse_lazy('movies:movies_list', args={1})
 
+    def get_initial(self):
+        curr_movie = get_object_or_404(Movie, id=self.kwargs['id'])
+        return {'movie': curr_movie}
+
 
 class EpisodeDetailView(DetailView):
     template_name = 'movies/episode.html'
@@ -66,10 +70,10 @@ class EpisodeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        curr_object = kwargs['object']
-        if curr_object.has_next():
-            context['next'] = curr_object.number + 1
-        if curr_object.has_previous():
-            context['previous'] = curr_object.number - 1
+        curr_episode = kwargs['object']
+        if curr_episode.has_next():
+            context['next'] = curr_episode.number + 1
+        if curr_episode.has_previous():
+            context['previous'] = curr_episode.number - 1
         return context
 

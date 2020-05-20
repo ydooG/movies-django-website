@@ -32,7 +32,7 @@ class Movie(models.Model):
     movie_picture = models.ImageField(
         upload_to=get_movie_image_path,
         validators=[FileExtensionValidator(allowed_extensions=CustomUser.VALID_IMAGE_EXTENSIONS)],
-        help_text='Лучше не грузить фотографии в альбомном ориентации, околоквадратные - лучше всего',
+        help_text='Лучше не грузить фотографии в альбомной ориентации, околоквадратные - лучше всего',
         verbose_name='Картинка',
     )
 
@@ -82,7 +82,6 @@ class Episode(models.Model):
 
     def has_next(self):
         episodes = self.movie.episodes.all()
-        print(episodes)
         try:
             episodes.get(season=self.season, number=self.number+1)
         except Episode.DoesNotExist:
@@ -91,7 +90,6 @@ class Episode(models.Model):
 
     def has_previous(self):
         episodes = self.movie.episodes.all()
-        print(episodes)
         try:
             episodes.get(season=self.season, number=self.number-1)
         except Episode.DoesNotExist:

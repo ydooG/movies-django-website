@@ -1,0 +1,35 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Обсуждение| {{ discussion.movie.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            <h3>Обусждение аниме <b>{{ discussion.movie.name }}</b></h3>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col text-center">
+            <h3>Темы</h3>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col">
+            <button class="btn btn-outline-success" onclick="location.href='{% url 'discussions:theme_create' discussion.id %}'">
+                Добавить тему
+            </button>
+        </div>
+    </div>
+    {% for theme in themes %}
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'discussions:theme_details' theme.id %}">{{ theme.title }}</a>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

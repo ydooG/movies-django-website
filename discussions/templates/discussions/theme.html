@@ -1,0 +1,55 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Тема
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            <h3>Тема</h3>
+            <h4>{{ theme.title }}</h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row my-3">
+        <div class="col text-center">
+            {{ theme.description }}
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col">
+            <button class="btn btn-outline-success"
+                    onclick="location.href='{% url 'discussions:post_create' theme.id %}'">
+                Добавить пост
+            </button>
+        </div>
+    </div>
+    {% for post in posts %}
+        <div class="post">
+            <h3>
+                <a href="{% url 'accounts:profile' post.author.username %}">
+                    {{ post.author.username }}
+                </a>
+                {{ post.pub_date|date:"d.m.Y P" }}
+            </h3>
+            <hr>
+            <span>{{ post.text }}</span><br>
+            <a href="{% url 'discussions:comment_create' post.id %}">Оставить комментарий</a>
+        </div>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <h3>
+                    <a href="{% url 'accounts:profile' comment.author.username %}">
+                        {{ comment.author.username }}
+                    </a>
+                    {{ comment.pub_date|date:"d.m.Y P" }}
+                </h3>
+                <hr>
+                <span>{{ comment.text }}</span><br>
+            </div>
+        {% endfor %}
+
+    {% endfor %}
+
+
+{% endblock %}

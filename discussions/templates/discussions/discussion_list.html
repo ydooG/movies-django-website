@@ -1,0 +1,33 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Обсуждения
+{% endblock %}
+
+{% block content %}
+    <div class="row mb-5">
+        <div class="col text-center">
+            <h1>Обсуждения</h1>
+            <span>Не нашли обсуждение по своему любимому аниме?
+                <a href="{% url 'discussions:discussion_create' %}">Создайте</a> его!</span>
+        </div>
+    </div>
+    <hr>
+
+
+    {% for discussion in discussions %}
+        <div class="row">
+            <div class="col-3">
+                <img class="img-thumbnail mx-auto d-block" src="{{ discussion.movie.movie_picture.url }}"
+                     alt="Картинка аниме"
+                     width="240" height="150">
+            </div>
+            <div class="col">
+                {{ discussion.movie.name }}<br>
+                <a href="{% url 'discussions:discussion_details' discussion.id %}">Перейти</a>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+
+{% endblock %}

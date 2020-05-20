@@ -19,7 +19,7 @@
             <span>{{ movie.description }}</span>
             <br>
             <br>
-            <button class="btn btn-success" onclick="location.href='{% url 'movies:add_episode' %}'">
+            <button class="btn btn-success" onclick="location.href='{% url 'movies:add_episode' movie.id %}'">
                 Добавить серию
             </button>
         </div>
