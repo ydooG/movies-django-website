@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2y2@9q#u-slxhfp1swvp5se!=5$l0vf&_v%y^4k#rlc)fb&tj_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['django-anime-site.herokuapp.com/']
 
 # admin:rasim123
 
