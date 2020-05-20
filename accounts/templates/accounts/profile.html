@@ -6,29 +6,48 @@
 
 {% block content %}
     <div class="row">
-        <div class="col">
-            <h1>Profile</h1>
+        <div class="col text-center">
+            <h1>Профиль</h1>
+            <span class="font-weight-light"></span>
         </div>
     </div>
     <hr>
 
     <div class="row">
         <div class="col">
-            {% if photo %}
-                <img class="img-thumbnail mx-auto d-block" src="{{ photo.url }}" alt="Profile photo" width="300" height="300">
-            {% else %}
-                <p>У вас нет фотографии профиля. Хотите
-                    <a href="{% url 'accounts:load_photo' %}">добавить</a>?</p>
-            {% endif %}
+            <div class="my-image">
+                {% if photo %}
+                    <img class="img-thumbnail mx-auto d-block" src="{{ photo.url }}" alt="Profile photo"
+                         width="300" height="300">
+                {% else %}
+                    <p>У вас нет фотографии профиля. Хотите
+                        <a href="{% url 'accounts:load_photo' %}">добавить</a>?</p>
+                {% endif %}
+            </div>
         </div>
 
         <div class="col">
-
+            <div class="data text-center">
+            <span class="font-weight-normal">Никнейм:
+                <span class="font-weight-light">{{ user.username }}</span>
+            </span>
+                <hr>
+                <span class="font-weight-normal">Почта:
+                <span class="font-weight-light">{{ user.email }}</span>
+            </span>
+                <hr>
+                <span class="font-weight-normal">Пол:
+                <span class="font-weight-light">{{ user.get_sex_display }}</span>
+            </span>
+                <hr>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div style="text-align: center" class="col">
-            <a href="{% url 'accounts:load_photo'%}">Изменить</a>
+        <div class="col" style="text-align: center">
+            {% if photo %}
+                <a href="{% url 'accounts:load_photo' %}">Изменить</a>
+            {% endif %}
         </div>
         <div class="col">
 

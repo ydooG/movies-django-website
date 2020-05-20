@@ -1,17 +1,28 @@
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Row, Column
 from django import forms
+from django.core.validators import MinLengthValidator, FileExtensionValidator
+from django_select2 import forms as s2forms
 
 from accounts.models import CustomUser
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    sex = forms.ChoiceField(
+        label='Пол',
+        choices=CustomUser.SEX_CHOICES,
+        widget=forms.RadioSelect,
+    )
+    password = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput,
+    )
+    password2 = forms.CharField(
+        label='Повтор пароля',
+        widget=forms.PasswordInput,
+    )
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'password', 'password2')
+        fields = ('email', 'sex', 'username', 'password', 'password2')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -28,4 +39,8 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserPhotoLoadForm(forms.Form):
-    photo = forms.FileField(label='Photo')
+
+    photo = forms.FileField(
+        label='Photo',
+        validators=[FileExtensionValidator(allowed_extensions=CustomUser.VALID_IMAGE_EXTENSIONS)]
+    )

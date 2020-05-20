@@ -1,0 +1,47 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            {% if movies.has_previous %}
+                <a href="{% url 'movies:movies_list' movies.previous_page_number %}">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </a>
+            {% endif %}
+
+            Страница {{ movies.number }} из {{ movies.paginator.num_pages }}
+
+            {% if movies.has_next %}
+                <a href="{% url 'movies:movies_list' movies.next_page_number %}">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-2 offset-10 mb-4">
+            <span>Добавить</span> <a href="{% url 'movies:add_movie' %}"><span class="align-text-middle"><i
+                class="fas fa-plus-circle"></i></span></a>
+        </div>
+    </div>
+
+    {% for movie in movies %}
+        <div class="row">
+            <div class="col-3">
+                <img class="img-thumbnail mx-auto d-block" src="{{ movie.movie_picture.url }}" alt="Картинка аниме"
+                     width="240" height="150">
+            </div>
+
+            <div class="col-9">
+                {{ movie.name }} <br>
+                <textarea readonly name="" id="" cols="88" rows="6">
+                        {{ movie.description }}
+                    </textarea>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
