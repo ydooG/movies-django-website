@@ -167,8 +167,8 @@ DATABASES['default'].update(db_from_env)
 # S3
 AWS_ACCESS_KEY_ID = 'AKIAJYOJG3E4QZKOKUIA'
 AWS_SECRET_ACCESS_KEY = '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'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'rasim-bucket'
 AWS_S3_REGION_NAME = 'eu-north-1'
 STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
