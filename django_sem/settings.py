@@ -28,6 +28,7 @@ ALLOWED_HOSTS = ['django-anime-site.herokuapp.com', '127.0.0.1']
 
 # admin:rasim123
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -157,3 +158,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
