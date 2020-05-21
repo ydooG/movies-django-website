@@ -49,7 +49,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['photo'] = self.request.user.profile_photo
+        context['photo'] = kwargs['object'].profile_photo
+        context['profile_user'] = get_object_or_404(CustomUser, username=self.kwargs['username'])
         return context
 
 

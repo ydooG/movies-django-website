@@ -3,19 +3,21 @@
 {% block title %}Регистрация{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <form method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-primary">Регистрация</button>
-            </form>
+    <div class="movie-create-form">
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Регистрация</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col">
-            <p>Уже есть аккаунт? <a href="{% url 'accounts:login' %}">Вход</a></p>
+        <div class="row">
+            <div class="col">
+                <p>Уже есть аккаунт? <a href="{% url 'accounts:login' %}">Вход</a></p>
+            </div>
         </div>
     </div>
 {% endblock %}

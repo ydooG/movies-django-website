@@ -19,9 +19,11 @@
                 {% if photo %}
                     <img class="img-thumbnail mx-auto d-block" src="{{ photo.url }}" alt="Profile photo"
                          width="300" height="300">
-                {% else %}
+                {% elif request.user == profile_user %}
                     <p>У вас нет фотографии профиля. Хотите
                         <a href="{% url 'accounts:load_photo' %}">добавить</a>?</p>
+                {% else %}
+                    <p>У пользователя нет фотографии</p>
                 {% endif %}
             </div>
         </div>
@@ -29,15 +31,15 @@
         <div class="col">
             <div class="data text-center">
             <span class="font-weight-normal">Никнейм:
-                <span class="font-weight-light">{{ user.username }}</span>
+                <span class="font-weight-light">{{ profile_user.username }}</span>
             </span>
                 <hr>
                 <span class="font-weight-normal">Почта:
-                <span class="font-weight-light">{{ user.email }}</span>
+                <span class="font-weight-light">{{ profile_user.email }}</span>
             </span>
                 <hr>
                 <span class="font-weight-normal">Пол:
-                <span class="font-weight-light">{{ user.get_sex_display }}</span>
+                <span class="font-weight-light">{{ profile_user.get_sex_display }}</span>
             </span>
                 <hr>
             </div>
@@ -45,7 +47,7 @@
     </div>
     <div class="row">
         <div class="col" style="text-align: center">
-            {% if photo %}
+            {% if photo and request.user == profile_user%}
                 <a href="{% url 'accounts:load_photo' %}">Изменить</a>
             {% endif %}
         </div>

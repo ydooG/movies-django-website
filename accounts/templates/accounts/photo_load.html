@@ -5,9 +5,11 @@
 {% block title %}Load Photo{% endblock %}
 
 {% block content %}
-    <form enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+    <div class="movie-create-form">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
 {% endblock %}
