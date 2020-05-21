@@ -132,15 +132,13 @@ USE_TZ = True
 # Crispy settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Directory for media files storing
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Auth settings
 LOGIN_URL = '/login/'
@@ -162,3 +160,14 @@ CHANNEL_LAYERS = {
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+
+# S3
+AWS_ACCESS_KEY_ID = 'AKIAJYOJG3E4QZKOKUIA'
+AWS_SECRET_ACCESS_KEY = '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'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = 'rasim-bucket'
+AWS_S3_REGION_NAME = 'eu-north-1'
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
