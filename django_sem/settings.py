@@ -134,13 +134,13 @@ USE_TZ = True
 # Crispy settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Directory for media files storing
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Auth settings
 LOGIN_URL = '/login/'
