@@ -167,6 +167,8 @@ DATABASES['default'].update(db_from_env)
 # S3
 AWS_ACCESS_KEY_ID = 'AKIAJYOJG3E4QZKOKUIA'
 AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'rasim-bucket'
