@@ -45,7 +45,7 @@ class MovieDetailView(DetailView):
         return context
 
 
-class EpisodeCreateView(CreateView):
+class EpisodeCreateView(LoginRequiredMixin, CreateView):
     form_class = EpisodeCreateForm
     template_name = 'movies/episode_create.html'
     success_url = reverse_lazy('movies:movies_list', args={1})

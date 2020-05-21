@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -16,7 +17,7 @@ def discussion_list(request):
         return HttpResponseNotAllowed(['GET', ])
 
 
-class DiscussionCreateView(CreateView):
+class DiscussionCreateView(LoginRequiredMixin, CreateView):
     model = Discussion
     form_class = DiscussionCreateForm
     template_name = 'discussions/discussion_create.html'
@@ -38,7 +39,7 @@ class DiscussionDetailView(DetailView):
         return context
 
 
-class ThemeCreateView(CreateView):
+class ThemeCreateView(LoginRequiredMixin, CreateView):
     model = Theme
     form_class = ThemeCreateForm
     template_name = 'discussions/theme_create.html'
@@ -64,7 +65,7 @@ class ThemeDetailView(DetailView):
         return context
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'discussions/post_create.html'
     success_url = reverse_lazy('discussions:discussion_list')
@@ -76,7 +77,7 @@ class PostCreateView(CreateView):
         return {'author': curr_user, 'theme': curr_theme}
 
 
-class CommentCreateView(CreateView):
+class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     template_name = 'discussions/comment_create.html'
     success_url = reverse_lazy('discussions:discussion_list')

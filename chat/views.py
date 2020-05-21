@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import AccessMixin
+from django.contrib.auth.mixins import AccessMixin, LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import TemplateView, ListView, FormView
@@ -35,7 +35,7 @@ class ChatView(ChatAccessMixin, TemplateView):
         return context
 
 
-class ChatListView(ListView):
+class ChatListView(LoginRequiredMixin, ListView):
     template_name = 'chat/index.html'
     model = Chat
     context_object_name = 'chats'
@@ -44,7 +44,7 @@ class ChatListView(ListView):
         return Chat.objects.filter(members__username=self.request.user.username)
 
 
-class CreateChatView(FormView):
+class CreateChatView(LoginRequiredMixin, FormView):
     template_name = 'chat/create_chat.html'
     form_class = ChatForm
     success_url = reverse_lazy('chat:chat_list')
@@ -56,7 +56,7 @@ class CreateChatView(FormView):
         return HttpResponseRedirect(reverse('chat:chat_list'))
 
 
-class ChatMembersView(ListView):
+class ChatMembersView(LoginRequiredMixin, ListView):
     model = CustomUser
     template_name = 'chat/chat_members.html'
     context_object_name = 'members'
