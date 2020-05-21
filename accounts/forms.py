@@ -41,6 +41,6 @@ class UserRegistrationForm(forms.ModelForm):
 class UserPhotoLoadForm(forms.Form):
 
     photo = forms.FileField(
-        label='Photo',
+        label='Фото профиля',
         validators=[FileExtensionValidator(allowed_extensions=CustomUser.VALID_IMAGE_EXTENSIONS)]
     )

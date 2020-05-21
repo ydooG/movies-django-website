@@ -1,7 +1,7 @@
 {% extends 'accounts/base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
-    Create Chat
+    Создать беседу
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 
             {% csrf_token %}
             {{ form|crispy }}
-            <button style="margin-left: 45%" type="submit" class="btn btn-success">Create</button>
+            <button style="margin-left: 45%" type="submit" class="btn btn-success">Создать</button>
         </form>
     </div>
 {% endblock %}

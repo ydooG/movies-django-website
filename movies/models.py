@@ -58,26 +58,29 @@ class Episode(models.Model):
         Movie,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='episodes'
+        related_name='episodes',
+        verbose_name='Аниме'
     )
 
     number = models.PositiveSmallIntegerField(
-
+        verbose_name='Серия'
     )
 
     season = models.PositiveSmallIntegerField(
-
+        verbose_name='Сезон'
     )
 
     title = models.CharField(
         max_length=128,
         blank=True,
         null=True,
+        verbose_name='Название серии (если есть)'
     )
 
     video_obj = models.FileField(
         upload_to=get_episode_path,
         validators=[FileExtensionValidator(allowed_extensions=VALID_VIDEO_EXTENSIONS)],
+        verbose_name='Видео'
     )
 
     def has_next(self):

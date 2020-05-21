@@ -1,12 +1,12 @@
 {% extends 'accounts/base.html' %}
 
 {% block title %}
-    Chat room
+    Беседа
 {% endblock %}
 {% block content %}
     <div class="col-8 offset-2 shadow mh-100">
         <div class="pt-2">
-            <h3>Chat with: <a href="{% url 'chat:members' chat.id %}">{{ chat.members.all.count }} members</a></h3>
+            <h3>Чат с <a href="{% url 'chat:members' chat.id %}">{{ chat.members.all.count }} пользователями</a></h3>
         </div>
         <hr>
         <div id="chat_block" style="height: 35em; overflow: auto;">
@@ -39,10 +39,10 @@
                 <div class="col-10">
                     <input id="chat-message-input" type="text"
                            class="form-control feed_comment_block"
-                           placeholder="Write message"/>
+                           placeholder="Написать сообщение"/>
                 </div>
                 <div class="col">
-                    <input id="chat-message-submit" class="btn btn-outline-dark" type="button" value="Send"/>
+                    <input id="chat-message-submit" class="btn btn-outline-dark" type="button" value="Отправить"/>
                 </div>
             </div>
 

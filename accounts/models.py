@@ -26,22 +26,26 @@ class CustomUser(AbstractUser):
     ]
 
     username = models.CharField(
+        verbose_name='Никнейм',
         max_length=128,
         unique=True,
         validators=[MinLengthValidator(5)],
     )
 
     email = models.EmailField(
+        verbose_name='Почта',
         max_length=128,
         unique=True,
     )
 
     sex = models.CharField(
+        verbose_name='Пол',
         max_length=1,
         choices=SEX_CHOICES,
     )
 
     profile_photo = models.ImageField(
+        verbose_name='Фото профиля',
         upload_to=get_photo_path,
     )
 

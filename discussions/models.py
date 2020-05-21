@@ -14,23 +14,75 @@ class Discussion(models.Model):
 
 
 class Theme(models.Model):
-    title = models.CharField(max_length=128)
-    description = models.TextField()
-    discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE, related_name='themes')
+    title = models.CharField(
+        max_length=128,
+        verbose_name='Заголовок'
+    )
+
+    description = models.TextField(
+        verbose_name='Описание'
+    )
+
+    discussion = models.ForeignKey(
+        to=Discussion,
+        on_delete=models.CASCADE,
+        related_name='themes',
+        verbose_name='Обсуждение'
+    )
 
 
 class Post(models.Model):
-    author = models.ForeignKey(to=CustomUser, null=True, on_delete=models.SET_NULL, related_name='posts')
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Publication Date')
-    text = models.TextField(max_length=4096)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, null=True, related_name='posts')
+    author = models.ForeignKey(
+        to=CustomUser, null=True,
+        on_delete=models.SET_NULL,
+        related_name='posts',
+        verbose_name=''
+    )
+
+    pub_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации'
+    )
+
+    text = models.TextField(
+        max_length=4096,
+        verbose_name='Текст'
+    )
+
+    theme = models.ForeignKey(
+        Theme,
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='posts',
+        verbose_name='Тема'
+    )
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(to=CustomUser, null=True, on_delete=models.SET_NULL, related_name='comments')
-    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Publication Date')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    text = models.TextField(max_length=4096)
+    author = models.ForeignKey(
+        to=CustomUser,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='comments',
+        verbose_name='Автор'
+    )
+
+    pub_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Publication Date'
+    )
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name='Пост'
+    )
+
+    text = models.TextField(
+        max_length=4096,
+        verbose_name='Текст'
+    )
 
 
 
